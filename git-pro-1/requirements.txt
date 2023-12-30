@@ -1,0 +1,8 @@
+praw
+asyncio
+discord.py
+characterai
+websockets
+aiohttp
+requests
+random
