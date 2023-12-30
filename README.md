@@ -10,7 +10,7 @@ a simple code to make a dumb bot
 - Recommend install from [Python's official website](https://www.python.org/) to download Python.
 - Remember to install pip and add python to PATH
 ### Step 2: Clone this repository
-- Git:
+- Git: `git clone https://github.com/hikari-fuji/Discord-dumb-bot.git`
 - Github CLI: `gh repo clone hikari-fuji/Discord-dumb-bot`
 ### Step 3: Install requirements packages
 - Windows: `python -m pip install -r requirements.txt`
