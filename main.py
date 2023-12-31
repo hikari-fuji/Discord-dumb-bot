@@ -12,7 +12,7 @@ TOKEN = config.TOKEN
 intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
-luna = discord.app_commands.CommandTree(client)
+dumb = discord.app_commands.CommandTree(client)
 
 @client.event
 async def on_ready():
@@ -23,11 +23,11 @@ async def on_ready():
     sync = await luna.sync()
     print(f"Đã đồng bộ thêm {len(sync)} lệnh")
     
-@luna.command(name = "help", description = "Hướng dẫn sử dụng bot") 
+@dumb.command(name = "help", description = "Hướng dẫn sử dụng bot") 
 async def hlp(ctx: discord.Interaction):
     print(f"{ctx.user} đã sử dụng lệnh 'help'!")
     await ctx.response.send_message(help.command_response(config.bot_prefix))
-@luna.command(name = "meme", description = "Nhận một meme ngẫu nhiên") 
+@dumb.command(name = "meme", description = "Nhận một meme ngẫu nhiên") 
 async def mem(ctx: discord.Interaction):
     url,name = meme.get_meme()
     em = discord.Embed(title=name)    
@@ -35,7 +35,7 @@ async def mem(ctx: discord.Interaction):
     em.set_footer(text = "Memes from subreddit")
     em.color = discord.Color.purple()
     await ctx.response.send_message(embed = em)
-@luna.command(name = "joke", description = "Nhận một câu đùa ngẫu nhiên") 
+@dimb.command(name = "joke", description = "Nhận một câu đùa ngẫu nhiên") 
 async def jok(ctx: discord.Interaction):
     setup, punch = joke.get_joke(config.memes_blacklist_genres)
     mbed = discord.Embed(
@@ -43,7 +43,7 @@ async def jok(ctx: discord.Interaction):
         color=discord.Color.orange()
     )
     await ctx.response.send_message(embed=mbed)
-@luna.command(name="anime",description="Tìm một anime theo tên")
+@dumb.command(name="anime",description="Tìm một anime theo tên")
 async def anim(ctx: discord.Interaction, name: str):
     try:
         res = anime.get_anime(name)
