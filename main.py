@@ -1,7 +1,7 @@
 import discord, psutil
 from datetime import datetime
 from discord.ext import tasks
-from cmdd import help, joke, meme, anime
+from cmdd import help, joke, meme, anime, manga
 
 try:
     import config
@@ -51,9 +51,9 @@ async def anim(ctx: discord.Interaction, name: str):
                 # Find another similar result
                 search_result = find_another_result()
                 if search_result:
-                    await ctx.send(f"Another similar result found: {search_result}")
+                    await ctx.response.send_message(f"Another similar result found: {search_result}")
                 else:
-                    await ctx.send("No results found.")
+                    await ctx.response.send_message("No results found.")
         else:
             # Create an embedded message with the search result
             embed = discord.Embed(title=res[0], description=res[1], color=discord.Color.blue())
@@ -68,9 +68,30 @@ async def anim(ctx: discord.Interaction, name: str):
             await ctx.response.send_message(embed=embed)
     except Exception as e:
         print(f"An error occurred: {str(e)}")
-@luna.command(name="manga",description="Tìm một manga theo tên")
-async def anim(ctx: discord.Interaction, name: str):
-    pass
+@dumb.command(name="manga",description="Tìm một manga theo tên")
+async def man(ctx: discord.Interaction, name: str):
+    try:
+        res = manga.get_manga(name)
+        if any(word in res[6].lower() for word in config.animaga_blacklist_genres):
+            # Find another similar result
+            search_result = find_another_result()
+            if search_result:
+                await ctx.response.send_message(f"Kết quả khác tương tự: {search_result}")
+            else:
+                await ctx.response.send_message("Không có kết quả :sad:")
+        else:
+            # Create an embedded message with the search result
+            embed = discord.Embed(title=res[0], description=res[1], color=discord.Color.blue())
+            embed.add_field(name=':calendar_spiral: Publish Date', value=res[2], inline=True)
+            embed.add_field(name=':pencil2: Main Author', value=res[3], inline=True)
+            embed.add_field(name=':ledger: Chapters', value=res[4], inline=True)
+            embed.add_field(name=':bar_chart: Status', value=res[5], inline=True)
+            embed.add_field(name=':label: Genres', value=res[6], inline=True)
+            embed.add_field(name=':star: Average Rating', value=res[7],inline=True)
+            embed.set_image(url=res[8])
+            await ctx.response.send_message(embed=embed)
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
 
 def find_another_result():
     # Implement code to find another similar result based on the search query
