@@ -5,7 +5,6 @@ def get_help_text(prefix):
 - `/joke`: đùa một câu ngẫu nhiên
 - `/anime`: tìm một anime theo tên
 - `/manga`: tìm một manga theo tên
-- `@luna`: chat với bot
 """
     return help_text
 def command_response(prefix):
