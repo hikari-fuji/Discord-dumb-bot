@@ -1,4 +1,5 @@
 praw
+psutil
 asyncio
 discord.py
 websockets
