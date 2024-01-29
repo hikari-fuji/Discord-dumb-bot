@@ -119,7 +119,7 @@ def calculate_fps():
 
 @client.event
 async def on_ready():
-    await dumb.sync(guild=discord.Object(id=1074642422367256607))
+    await dumb.sync()
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='/help'))
     print(f"{config.bot_name} v{config.bot_version}")
     print('Sẵn sàng!')
