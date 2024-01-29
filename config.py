@@ -1,6 +1,5 @@
 bot_name = 'dumb-bot' # your bot's name here
 bot_version = '3.6.0'# your bot's version
-bot_prefix = 'd!' # your bot's prefix
 bot_timeghost_ping = 2 # time bot ping (here is about minutes)
 channel_ping = 123456789 # the id of the channel your bot ping
 auto_react_emj = {
@@ -11,6 +10,10 @@ example_thumb = 'https://lh3.googleusercontent.com/fife/AGXqzDnmVI5HEeIeHrXZch1t
 ping_thumb = f'{example_thumb}' # the thumbnail in the ping
 memes_blacklist_genres = ['nsfw','racist','vnwar', 'politics', 'social','lgbt','dad','mom'] # meme negative genres
 animaga_blacklist_genres = ['nsfw', 'racist'] #anime, manga negative genres
-TOKEN = 'Your bot token'
+TOKEN = 'token'
 
-
+praw_client_id = "praw client id here"
+praw_client_secret = "praw client secret here"
+praw_username = "praw username here"
+praw_password = "praw password here"
+pwaw_user_agent = "pwaw user agent here"

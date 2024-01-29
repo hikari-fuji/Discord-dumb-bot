@@ -1,4 +1,4 @@
-def get_help_text(prefix):
+def get_help_text():
     help_text = f"""Các lệnh của bot:
 - `/help`: hiện hướng dẫn sử dụng bpt
 - `/meme`: một meme ngẫu nhiên
@@ -7,5 +7,5 @@ def get_help_text(prefix):
 - `/manga`: tìm một manga theo tên
 """
     return help_text
-def command_response(prefix):
-    return get_help_text(prefix)
+def command_response():
+    return get_help_text()

@@ -1,14 +1,15 @@
 import praw
 import config
 import random
+import config
 
 black_list = config.memes_blacklist_genres
                 
-reddit = praw.Reddit(   client_id = "fc8lB0GHfW5TZwjx_7Vfbg", #reddit client_id
-                        client_secret = "aVtar8Cx3mD3ZHNpzTmCNS8KH75l5w", #reddit secret id 
-                        username = "Hikari_fuji", #reddit username
-                        password = "hongungok", #reddit pass
-                        user_agent = "Hikari Fuji" #user agent (anything is ok)
+reddit = praw.Reddit(   client_id = config.praw_client_id, #reddit client_id
+                        client_secret = config.praw_client_secret, #reddit secret id 
+                        username = config.praw_username, #reddit username
+                        password = config.praw_password, #reddit pass
+                        user_agent = config.pwaw_user_agent #user agent (anything is ok)
                     )
 def get_meme():
     subreddit = reddit.subreddit("memes")
