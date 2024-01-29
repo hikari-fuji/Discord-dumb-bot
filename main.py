@@ -13,20 +13,11 @@ intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
 dumb = discord.app_commands.CommandTree(client)
-
-@client.event
-async def on_ready():
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='f!help'))
-    print(f"{config.bot_name} v{config.bot_version}")
-    print('Sẵn sàng!')
-    ping_channel.start()
-    sync = await luna.sync()
-    print(f"Đã đồng bộ thêm {len(sync)} lệnh")
     
 @dumb.command(name = "help", description = "Hướng dẫn sử dụng bot") 
 async def hlp(ctx: discord.Interaction):
     print(f"{ctx.user} đã sử dụng lệnh 'help'!")
-    await ctx.response.send_message(help.command_response(config.bot_prefix))
+    await ctx.response.send_message(help.command_response())
 @dumb.command(name = "meme", description = "Nhận một meme ngẫu nhiên") 
 async def mem(ctx: discord.Interaction):
     url,name = meme.get_meme()
@@ -35,7 +26,7 @@ async def mem(ctx: discord.Interaction):
     em.set_footer(text = "Memes from subreddit")
     em.color = discord.Color.purple()
     await ctx.response.send_message(embed = em)
-@dimb.command(name = "joke", description = "Nhận một câu đùa ngẫu nhiên") 
+@dumb.command(name = "joke", description = "Nhận một câu đùa ngẫu nhiên") 
 async def jok(ctx: discord.Interaction):
     setup, punch = joke.get_joke(config.memes_blacklist_genres)
     mbed = discord.Embed(
@@ -98,10 +89,6 @@ def find_another_result():
     # Return the new search result or None if not found
     return None
 
-
-
-
-
 current_time = datetime.now()
 formatted_time = current_time.strftime("%d-%m-%Y")
 @tasks.loop(minutes=config.bot_timeghost_ping)
@@ -130,5 +117,12 @@ def calculate_fps():
     fps = int(1 + cpu_percent)
     return fps
 
+@client.event
+async def on_ready():
+    await dumb.sync(guild=discord.Object(id=1074642422367256607))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='/help'))
+    print(f"{config.bot_name} v{config.bot_version}")
+    print('Sẵn sàng!')
+    ping_channel.start()
 
 client.run(TOKEN)
